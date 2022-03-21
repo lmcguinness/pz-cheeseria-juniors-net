@@ -50,6 +50,7 @@ export class CheesesTabComponent implements OnInit {
       title: cheeseData.title,
       category: cheeseData.category,
       description: cheeseData.description,
+      price: cheeseData.price
     }),
       this.dialog.open(CheeseCardDialogComponent, dialogConfig);
   }
