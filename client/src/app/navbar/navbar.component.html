@@ -165,6 +165,7 @@
           <div class="cart-summary" *ngIf="cartSize !== 0">
             <small>{{ cartSize !== 0 ? cartSize : 0 }} Selected item(s)</small>
             <h5>TOTAL : {{ calculateTotal() | currency: "USD" }}</h5>
+            <button class="btn-danger buttons" (click)="onPurchaseClick()">Purchase</button>
           </div>
         </div>
       </li>

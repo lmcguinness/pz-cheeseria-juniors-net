@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../_services/cart.service';
 import { CartModelPublic } from '../_models/cart';
 import { Cheese } from '../_models/cheese';
+import { ProductsService } from '../_services/cheeses.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,10 @@ export class NavbarComponent implements OnInit {
   store: any = [];
   logo: any;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit() {
     // set the products locally
@@ -55,5 +59,21 @@ export class NavbarComponent implements OnInit {
       (total, [key, value]) => total + this.getDetails(key).price * value,
       0
     );
+  }
+
+  onPurchaseClick() {
+    this.manageCartItems(this.cartData);
+  }
+
+  manageCartItems(cartData) {
+    const purchasedItems: Cheese[] = [];
+    for (let key in cartData) {
+      const itemDetails = this.getDetails(key);
+      purchasedItems.push(itemDetails);
+    }
+    console.log('all items', purchasedItems);
+    this.productsService.purchaseItem(purchasedItems).subscribe((data) => {
+      console.log('purchasedItemAPIRespose', data);
+    });
   }
 }

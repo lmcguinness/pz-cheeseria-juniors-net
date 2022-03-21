@@ -3,6 +3,7 @@ import { ProductsService } from '../_services/cheeses.service';
 import { CartService } from '../_services/cart.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CheeseCardDialogComponent } from '../cheese-card-dialog/cheese-card-dialog.component';
+import { Cheese } from '../_models/cheese';
 
 @Component({
   selector: 'app-cheeses-tab',
@@ -40,7 +41,7 @@ export class CheesesTabComponent implements OnInit {
     this.cartService.AddProductToCart(id);
   }
 
-  openDialog(cheeseData) {
+  openDialog(cheeseData: Cheese) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
