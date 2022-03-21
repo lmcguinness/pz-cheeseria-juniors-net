@@ -18,9 +18,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
+import { CheeseCardDialogComponent } from './cheese-card-dialog/cheese-card-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, CheesesTabComponent],
+  declarations: [AppComponent, NavbarComponent, CheesesTabComponent, CheeseCardDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,6 +38,7 @@ import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
     MatDialogModule,
     NgxSkeletonLoaderModule.forRoot(),
     NgxPaginationModule,
+    MatDialogModule
   ],
   bootstrap: [AppComponent],
 })
