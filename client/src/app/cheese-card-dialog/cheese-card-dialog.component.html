@@ -1,18 +1,31 @@
-<h2 mat-dialog-title>{{ cheeseData.title }}</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Description</h3>
-  <p>
-    {{ cheeseData.description }}
-  </p>
-  <h3>Category</h3>
-  <p>
-    {{ cheeseData.category }}
-  </p>
-  <h3>Price</h3>
-  <p>
-    ${{ cheeseData.price }}
-  </p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
+<div *ngIf="!isRecentPurchase; else elseBlock">
+  <h2 mat-dialog-title>{{ cheeseData.title }}</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>Description</h3>
+    <p>
+      {{ cheeseData.description }}
+    </p>
+    <h3>Category</h3>
+    <p>
+      {{ cheeseData.category }}
+    </p>
+    <h3>Price</h3>
+    <p>${{ cheeseData.price }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>
+
+<ng-template #elseBlock>
+  <div *ngFor="let cheeseData of cheeseData">
+    <h2 mat-dialog-title>{{ cheeseData.title }}</h2>
+    <mat-dialog-content class="mat-typography">
+      <h3>Price</h3>
+      <p>${{ cheeseData.price }}</p>
+    </mat-dialog-content>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</ng-template>

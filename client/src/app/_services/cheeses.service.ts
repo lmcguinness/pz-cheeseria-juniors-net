@@ -18,7 +18,16 @@ export class ProductsService {
     return this.http.get(this.server_url + '/cheeses');
   }
 
-  purchaseItem(purchasedItems: Cheese[]): Observable<any>{
-    return this.http.post(this.server_url + '/cheeses', purchasedItems);
+  purchaseItem(purchasedItems: Cheese[]): Observable<any> {
+    return this.http.post(
+      this.server_url + '/cheeses' + '/api/purchaseItem',
+      purchasedItems
+    );
+  }
+
+  getRecentPurchases(): Observable<any> {
+    return this.http.get(
+      this.server_url + '/cheeses' + '/api/recentItemsPurchased'
+    );
   }
 }

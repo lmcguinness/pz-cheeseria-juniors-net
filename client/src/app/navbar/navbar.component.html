@@ -26,6 +26,7 @@
           class="nav-link"
           data-toggle="collapse"
           data-target=".navbar-collapse.show"
+          (click)="getRecentPurchases()"
           >Recent Purchases</a
         >
       </li>
@@ -72,14 +73,7 @@
         >
           <h2 class="ml-5 mt-4">Your Shopping Cart</h2>
           <div
-            class="
-              no-item
-              w-100
-              d-flex
-              justify-content-center
-              align-items-center
-              flex-column
-            "
+            class="no-item w-100 d-flex justify-content-center align-items-center flex-column"
             *ngIf="cartSize === 0"
           >
             <span
@@ -102,39 +96,18 @@
               *ngFor="let purchaseItem of cartData | keyvalue"
             >
               <div
-                class="
-                  col
-                  d-flex
-                  justify-content-between
-                  product-widget
-                  w-100
-                  py-2
-                "
+                class="col d-flex justify-content-between product-widget w-100 py-2"
               >
                 <div class="d-flex flex-column">
                   <button
                     type="button"
-                    class="
-                      mx-3
-                      mb-1
-                      btn-danger
-                      font-weight-bold
-                      px-2
-                      rounded-top
-                    "
+                    class="mx-3 mb-1 btn-danger font-weight-bold px-2 rounded-top"
                     (click)="changeItemAmount(purchaseItem.key, 1)"
                   >
                     +
                   </button>
                   <button
-                    class="
-                      mx-3
-                      mt-1
-                      btn-danger
-                      font-weight-bold
-                      px-2
-                      rounded-bottom
-                    "
+                    class="mx-3 mt-1 btn-danger font-weight-bold px-2 rounded-bottom"
                     (click)="changeItemAmount(purchaseItem.key, -1)"
                   >
                     -
@@ -165,7 +138,9 @@
           <div class="cart-summary" *ngIf="cartSize !== 0">
             <small>{{ cartSize !== 0 ? cartSize : 0 }} Selected item(s)</small>
             <h5>TOTAL : {{ calculateTotal() | currency: "USD" }}</h5>
-            <button class="btn-danger buttons" (click)="onPurchaseClick()">Purchase</button>
+            <button class="btn-danger buttons" (click)="onPurchaseClick()">
+              Purchase
+            </button>
           </div>
         </div>
       </li>

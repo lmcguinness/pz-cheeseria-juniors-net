@@ -9,7 +9,7 @@ namespace Pz.Cheeseria.Api.Controllers
     [ApiController]
     public class CheesesController : ControllerBase
     {
-        //private purchasedItems;
+        private static RecentPurchases _recentPurchases = new RecentPurchases();
 
         [HttpGet]
         [ProducesResponseType(typeof(Cheese[]), 200)]
@@ -18,12 +18,21 @@ namespace Pz.Cheeseria.Api.Controllers
             return Ok(CheesesRepository.Cheeses);
         }
 
-        [HttpPost]
+        [HttpPost("api/purchaseItem")]
         [ProducesResponseType(typeof(Cheese[]), 200)]
         public IActionResult purchaseItem(Cheese[] itemsPurchased)
         {
-            var purchasedItems = itemsPurchased;
+            _recentPurchases.setItemsPurchased(itemsPurchased);
             return Ok();
         }
+
+        [HttpGet("api/recentItemsPurchased")]
+        [ProducesResponseType(typeof(Cheese[]), 200)]
+        public IActionResult getItemsPurchased()
+        {
+            var recentPurchases = _recentPurchases.getItemsPurchased();
+            return Ok(recentPurchases);
+        }
+
     }
 }

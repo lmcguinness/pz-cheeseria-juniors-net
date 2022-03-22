@@ -8,11 +8,18 @@ import { Cheese } from '../_models/cheese';
   styleUrls: ['./cheese-card-dialog.component.css'],
 })
 export class CheeseCardDialogComponent implements OnInit {
-  public cheeseData: Cheese;
+  public cheeseData;
+  public isRecentPurchase = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) data) {
-    this.cheeseData = data;
+    this.cheeseData = data.cheeseCardData;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.cheeseData.length > 0) {
+      this.isRecentPurchase = true;
+    } else {
+      this.isRecentPurchase = false;
+    }
+  }
 }

@@ -3,6 +3,8 @@ import { CartService } from '../_services/cart.service';
 import { CartModelPublic } from '../_models/cart';
 import { Cheese } from '../_models/cheese';
 import { ProductsService } from '../_services/cheeses.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CheeseCardDialogComponent } from '../cheese-card-dialog/cheese-card-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -15,13 +17,15 @@ export class NavbarComponent implements OnInit {
   cartTotal: number;
   _message: string;
   products: Cheese[];
+  recentItemsPurchased: Cheese[];
 
   store: any = [];
   logo: any;
 
   constructor(
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -71,9 +75,24 @@ export class NavbarComponent implements OnInit {
       const itemDetails = this.getDetails(key);
       purchasedItems.push(itemDetails);
     }
-    console.log('all items', purchasedItems);
     this.productsService.purchaseItem(purchasedItems).subscribe((data) => {
-      console.log('purchasedItemAPIRespose', data);
     });
+  }
+
+  getRecentPurchases() {
+    this.productsService
+      .getRecentPurchases()
+      .subscribe((recentItemsPurchased) => {
+        this.recentItemsPurchased = recentItemsPurchased;
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        (dialogConfig.data = {
+          cheeseCardData: this.recentItemsPurchased,
+        }),
+          this.dialog.open(CheeseCardDialogComponent, dialogConfig);
+      });
   }
 }

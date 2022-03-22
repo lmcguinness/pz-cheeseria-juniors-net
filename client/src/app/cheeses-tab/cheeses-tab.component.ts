@@ -48,10 +48,7 @@ export class CheesesTabComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     (dialogConfig.data = {
-      title: cheeseData.title,
-      category: cheeseData.category,
-      description: cheeseData.description,
-      price: cheeseData.price
+      cheeseCardData: cheeseData,
     }),
       this.dialog.open(CheeseCardDialogComponent, dialogConfig);
   }
