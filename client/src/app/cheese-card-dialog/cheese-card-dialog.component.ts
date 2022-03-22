@@ -8,8 +8,8 @@ import { Cheese } from '../_models/cheese';
   styleUrls: ['./cheese-card-dialog.component.css'],
 })
 export class CheeseCardDialogComponent implements OnInit {
-  public cheeseData;
-  public isRecentPurchase = false;
+  cheeseData;
+  isRecentPurchase = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) data) {
     this.cheeseData = data.cheeseCardData;
